@@ -1,0 +1,66 @@
+@import "../variables.scss";
+@import "../mixins.scss";
+
+.wrapper {
+  display: inline-flex;
+  position: relative;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  margin-left: 2px;
+}
+
+.label {
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
+.checkbox {
+  position: absolute;
+  opacity: 0;
+
+  & + .label {
+    @include outline();
+  }
+
+  &:hover + .label {
+    @include outline($gray-600);
+  }
+
+  &:checked + .label {
+    background-color: $blue-600;
+
+    @include outline($blue-600);
+  }
+
+  &:focus + .label {
+    @include outline($gray-600);
+  }
+
+  &:checked + .label::after {
+    position: absolute;
+    top: 50%;
+    left: 15%;
+    transform: rotate(45deg);
+    box-shadow:
+      2px 0 0 $white,
+      4px 0 0 $white,
+      4px -2px 0 $white,
+      4px -4px 0 $white,
+      4px -6px 0 $white,
+      4px -8px 0 $white;
+    background: $white;
+    width: 2px;
+    height: 2px;
+    content: "";
+  }
+
+  &:disabled + .label,
+  label {
+    cursor: not-allowed;
+
+    @include outline($gray-300);
+  }
+}
